@@ -1,6 +1,7 @@
 from rest_framework_nested import routers 
 from product import views 
 from category import views as category_views
+from customer import views as customer_views
 
 
 
@@ -9,6 +10,8 @@ router.register('products', views.ProductViewSet,
                  basename='products')
 router.register('categories', category_views.CategoryViewSet,
                  basename='categories')
+router.register('customers', customer_views.CustomerVeiwSet,
+                 basename='customers')
 
 product_router = routers.NestedDefaultRouter(router, 'products',
                                              lookup='product')

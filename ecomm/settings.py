@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #3rd party apps 
     'rest_framework',
+    'djoser',
 
     #my apps 
     'users',
     'product',
     'category',
     'customer',
+    
 ]
 
 MIDDLEWARE = [
@@ -137,4 +139,32 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+
+}
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserCreateSerializer',
+        'current_user': 'users.serializers.UserSerializer',
+    },
+    'PASSWORD_RESET_CONFIRM_URL': 'auth/users/reset_password_confirm/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    
+    
+}
+
 AUTH_USER_MODEL = 'users.CustomUser' 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #the defult
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587 
+EMAIL_HOST_USER = 'hazemhosam105@gmail.com'
+EMAIL_HOST_PASSWORD = 'tppp iguh cxiv evth'
+EMAIL_USE_TLS = True
