@@ -3,6 +3,7 @@ from product import views
 from category import views as category_views
 from customer import views as customer_views
 from cart import views as cart_views 
+from order import views as order_views
 
 
 
@@ -16,6 +17,8 @@ router.register('customers', customer_views.CustomerVeiwSet,
                  basename='customers')
 router.register('carts', cart_views.CartViewSet,
                 basename='carts')
+router.register('orders', order_views.OrderViewSet,
+                basename='orders')
 
 product_router = routers.NestedDefaultRouter(router, 'products',
                                              lookup='product')

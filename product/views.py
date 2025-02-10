@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet 
+from rest_framework import permissions 
 from . serializers import ProductSerializer,ReviewSerializer
 from django.db.models.aggregates import Count ,Sum,Avg
 from .models import Product ,ProductReview
+from .permissions import IsAdminOrReadOnly
 
 # Create your views here.
 class ProductViewSet(ModelViewSet):
@@ -11,9 +13,12 @@ class ProductViewSet(ModelViewSet):
         .annotate(
         rating=Avg('reviews__rating')).all() 
     serializer_class = ProductSerializer 
+    permission_classes = [IsAdminOrReadOnly]
+
 
 class ReviewViewSet(ModelViewSet):
-    serializer_class = ReviewSerializer
+    serializer_class = ReviewSerializer 
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly] 
 
     def get_queryset(self):
         return ProductReview.objects. \

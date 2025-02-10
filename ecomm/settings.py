@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path 
 import os 
 
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'category',
     'customer',
     'cart',
+    'order',
     
 ]
 
@@ -149,6 +151,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
+   "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
 
 }
 DJOSER = {
