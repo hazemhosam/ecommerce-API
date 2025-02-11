@@ -23,6 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-xf$ml1!(!g5&a%1^l#ttwbi*ozbfolr=!lm9t++twvxk(3y+^^'
+STRIPE_SECRET_KEY = 'sk_test_51QrL0gRY31x4PZSNOjbKhe7EZR7UqElGrZiqOoc65YwnYVH1oxoTcFZVhU4MpXqFoHUFrH2ouR7pxn5LBWTevJZO00RQ5DgeHe'
+STRIPE_PUBLIC_KEY = 'pk_test_51QrL0gRY31x4PZSNIGjMo6o09gmXMMqIJl5kgYNgtP5RXsJu0MVFWSRsMnzWVkNhULSAfdVw4OR6GUEx7NEXKZCR00svtgVdFG'
+STRIPE_WEBHOOK_SECRET = 'whsec_33ab54a5564aa078623a6ddd8955885211bc31eae70d2005069bc6a76ad4babc'
+                         
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -50,6 +55,7 @@ INSTALLED_APPS = [
     'customer',
     'cart',
     'order',
+    'payment',
     
 ]
 
