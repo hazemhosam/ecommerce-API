@@ -1,9 +1,8 @@
-from rest_framework.viewsets import ModelViewSet , GenericViewSet
-
+from rest_framework.viewsets import ModelViewSet 
 from rest_framework.response import Response
 from rest_framework import status
-
 from customer.models import Customer
+from rest_framework.filters import OrderingFilter
 from order.serializers import OrderCreateSerializer, OrderSerializer, OrderUpdateSerializer
 from rest_framework import permissions 
 
@@ -14,6 +13,8 @@ from django.shortcuts import render
 class OrderViewSet(ModelViewSet):
     http_method_names = ['get','post','patch','delete',
                          'head','options']
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['placed_at']
     
     def get_permissions(self):
         if self.request.method in ['PATCH','DELETE']:

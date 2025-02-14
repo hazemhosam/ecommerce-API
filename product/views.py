@@ -1,10 +1,13 @@
-from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet 
 from rest_framework import permissions 
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
+from pagination.pagination import DefaultPagination
 from . serializers import ProductSerializer,ReviewSerializer
-from django.db.models.aggregates import Count ,Sum,Avg
+from django.db.models.aggregates import Avg
 from .models import Product ,ProductReview
 from .permissions import IsAdminOrReadOnly
+from .filters import ProductFilter
 
 # Create your views here.
 class ProductViewSet(ModelViewSet):
@@ -14,6 +17,10 @@ class ProductViewSet(ModelViewSet):
         rating=Avg('reviews__rating')).all() 
     serializer_class = ProductSerializer 
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [DjangoFilterBackend,SearchFilter]
+    filterset_class = ProductFilter 
+    search_fields = ['title','description']
+    pagination_class = DefaultPagination
 
 
 class ReviewViewSet(ModelViewSet):
