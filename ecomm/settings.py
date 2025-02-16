@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'django_filters',
+    'drf_yasg',
 
     #my apps 
     'users',
@@ -157,19 +158,29 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+   'AUTH_HEADER_TYPES': ('JWT','Bearer'),
    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
 
 }
 DJOSER = {
     'SERIALIZERS': {
-        'user_create': 'users.serializers.UserCreateSerializer',
-        'current_user': 'users.serializers.UserSerializer',
+        'user_create': 'users.serializers.CustomUserCreateSerializer',
+        'current_user': 'users.serializers.CustomUserSerializer',
     },
     'PASSWORD_RESET_CONFIRM_URL': 'auth/users/reset_password_confirm/{uid}/{token}',
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     
     
+}
+
+SWAGGER_SETTINGS = {
+'SECURITY_DEFINITIONS': {
+ 'Bearer':{
+    'type':'apiKey',
+    'name':'Authorization',
+    'in':'header'
+  }
+ }
 }
 
 AUTH_USER_MODEL = 'users.CustomUser' 

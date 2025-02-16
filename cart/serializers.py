@@ -3,13 +3,13 @@ from rest_framework import serializers
 from cart.models import Cart, CartItem
 from product.models import Product
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id','title','description','price']
 
 class CartItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(read_only=True)
+    product = ProductSimpleSerializer(read_only=True)
     total_price = serializers.SerializerMethodField()
     class Meta:
         model = CartItem

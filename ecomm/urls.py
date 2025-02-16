@@ -19,6 +19,20 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework_simplejwt import views as jwt_views 
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title= 'E-commerce API',
+        default_version='v1',
+        description='API documentation for e-comm'
+    ),
+    public=True,
+    authentication_classes=(JWTAuthentication,),
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +42,9 @@ urlpatterns = [
          name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(),
          name='token_refresh'),   
-    path('payment/', include('payment.urls')),      
+    path('payment/', include('payment.urls')),
+    path('api/swagger/',schema_view.with_ui('swagger',cache_timeout=0),
+         name='schema-swagger-ui')     
     
 ]
 

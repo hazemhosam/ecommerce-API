@@ -4,10 +4,10 @@ from django.db import transaction
 from cart.models import Cart, CartItem
 from customer.models import Customer
 from order.models import Order, OrderItem 
-from cart.serializers import ProductSerializer
+from cart.serializers import ProductSimpleSerializer
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer() 
+    product = ProductSimpleSerializer() 
     total_price = serializers.SerializerMethodField()
     class Meta:
         model = OrderItem
