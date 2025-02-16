@@ -13,7 +13,7 @@ Search and Filtering: Advanced search and filtering options for products.
 
 Pagination: Efficient handling of large datasets with pagination.
 
-API Documentation: Comprehensive API documentation using Swagger/OpenAPI.
+API Documentation: Comprehensive API documentation using Swagger/OpenAPI at ```/api/swagger/```.
 
 ## Technologies Used
 Backend: Django, Django REST Framework (DRF)
